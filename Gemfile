@@ -7,6 +7,7 @@ gem 'googlebooks'
 gem 'openlibrary'
 
 gem "opensesame-github"
+gem "omniauth-openid"
 gem "formtastic"
 gem "possessive"
 gem 'has_scope'
