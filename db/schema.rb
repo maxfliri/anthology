@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130113011827) do
+ActiveRecord::Schema.define(:version => 20130113153214) do
 
   create_table "books", :force => true do |t|
     t.string   "title"
@@ -44,10 +44,10 @@ ActiveRecord::Schema.define(:version => 20130113011827) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.string   "github_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.string   "github_login"
+    t.string   "uid"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "nickname"
     t.string   "email"
     t.string   "provider"
   end

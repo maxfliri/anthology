@@ -8,7 +8,8 @@ FactoryGirl.define do
 
   factory :user do
     name "Winston Smith-Churchill"
-    sequence(:github_id)
+    provider "test"
+    sequence(:uid)
   end
 
   factory :loan do
