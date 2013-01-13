@@ -1,11 +1,11 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :github_id, :github_login, :email
+  attr_accessible :name, :github_id, :github_login, :email, :provider
 
   has_many :loans, :dependent => :destroy
   has_many :copies, :through => :loans, :conditions => ['loans.state = ?','on_loan']
   has_many :books, :through => :copies
 
-  validates :github_id, :presence => true, :uniqueness => true
+  validates :github_id, :presence => true, :uniqueness => {:scope => :provider}
 
   def current_copies
     copies.includes(:book)
@@ -16,15 +16,16 @@ class User < ActiveRecord::Base
   end
 
   def self.find_or_create_from_auth_hash(auth_hash)
+    provider = auth_hash.provider
     github_id = auth_hash.uid.to_s
     nickname = auth_hash.info ? auth_hash.info.nickname : nil
     email = auth_hash.info ? auth_hash.info.email : nil
 
-    current_user = self.where(:github_id => github_id).first
+    current_user = self.where(:provider => provider, :github_id => github_id).first
     if current_user
       current_user.update_attributes(:name => auth_hash.info.name, :github_login => nickname, :email => email)
     else
-      current_user = self.create!(:github_id => github_id, :name => auth_hash.info.name, :github_login => nickname, :email => email)
+      current_user = self.create!(:provider => provider, :github_id => github_id, :name => auth_hash.info.name, :github_login => nickname, :email => email)
     end
 
     current_user
