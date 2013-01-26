@@ -24,6 +24,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :development do
+  gem 'certified'
+end
+
 group :test do
   gem "shoulda-context", '~> 1.0.2'
   gem 'capybara', '1.1.2'
