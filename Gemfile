@@ -6,7 +6,7 @@ gem 'pg'
 gem 'googlebooks'
 gem 'openlibrary'
 
-gem "opensesame-github"
+gem "warden"
 gem "omniauth-openid"
 gem "omniauth-google-apps"
 gem "formtastic"

@@ -16,8 +16,4 @@ module ApplicationHelper
     ENV['LIBRARY_TITLE'] || "Library"
   end
 
-  def organization_name
-    OpenSesame::Github.organization_name
-  end
-
 end

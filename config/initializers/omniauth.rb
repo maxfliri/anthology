@@ -4,7 +4,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 end
 
 Rails.application.config.middleware.use Warden::Manager do |manager|
-  manager.scope_defaults :team_member, :strategies => [:opensesame_github]
   manager.failure_app = SessionsController.action(:failure)
 end
 
