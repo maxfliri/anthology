@@ -1,9 +1,6 @@
-OpenSesame::Github.organization_name = ENV['GITHUB_ORG'] || 'alphagov'
-
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :developer, { :fields => [:id, :name, :nickname], :uid_field => :id } unless Rails.env.production?
-  provider :open_id, :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id'
-  provider :github, ENV['GITHUB_CLIENT_ID'], ENV['GITHUB_CLIENT_SECRET']
+  provider :google_apps, :name => 'open_id', :domain => ENV["GOOGLE_APPS_DOMAIN"]
 end
 
 Rails.application.config.middleware.use Warden::Manager do |manager|

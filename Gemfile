@@ -8,6 +8,7 @@ gem 'openlibrary'
 
 gem "opensesame-github"
 gem "omniauth-openid"
+gem "omniauth-google-apps"
 gem "formtastic"
 gem "possessive"
 gem 'has_scope'
