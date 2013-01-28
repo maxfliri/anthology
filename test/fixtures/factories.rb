@@ -6,6 +6,10 @@ FactoryGirl.define do
     google_id "cdxf__Ch8QMC"
   end
 
+  factory :device do
+    sequence(:model) {|n| "Device ##{n}" }
+  end
+
   factory :user do
     name "Winston Smith-Churchill"
     provider "test"
