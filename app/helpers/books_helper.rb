@@ -13,6 +13,10 @@ module BooksHelper
     end
   end
 
+  def book_image_tag(book)
+    book_cover_tag(book)
+  end
+
   def cover_urls(book, size = "S")
     response = { }
 

@@ -1,0 +1,33 @@
+<section class="wrap two-column start">
+  <div class="greeting">
+    <h1>Welcome, <%= current_user.name %>!</h1>
+    <span>You have <%= link_to "#{pluralize current_user.copies.count, 'device'} on loan", user_path(current_user) %> right now.</span>
+  </div>
+
+  <div class="book-lookup column left">
+    <div class="start-form">
+      <h2>Search devices by title</h2>
+      <%= form_tag list_devices_path, :method => :get do %>
+        <p>
+          <%= text_field_tag :q, params[:q], :placeholder => "Search titles.." %>
+          <%= submit_tag "Go", :class => "btn" %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="column right">
+    <div class="recently-added">
+      <h2>Recently added devices</h2>
+      <%= render :partial => "devices/copy_grid", :locals => { :copies => @recently_added_copies } %>
+    </div>
+
+    <div class="browse">
+      <h2>Browse the library</h2>
+      <%= render :partial => "devices/device_grid", :locals => { :books => @books } %>
+      <%= link_to "View the whole collection", devices_path, :class => "btn" %>
+    </div>
+  </div>
+
+  <div class="clear"></div>
+</section>

@@ -1,0 +1,21 @@
+<section class="single_book wrap">
+  <div class="cover"><%= device_image_tag @book %></div>
+
+  <div class="title">
+    <h1><%= @book.model %></h1>
+  </div>
+
+  <p><%= pluralize @book.copies.count, "copy" %></p>
+
+  <ul class="copies">
+    <%= render :partial => "copy", :collection => @book.copies.ordered_by_availability %>
+  </ul>
+
+  <nav class="actions">
+    <ul>
+      <li><%= link_to "Edit details", edit_device_path(@book) %></li>
+      <li><%= link_to "Add another copy", new_device_copy_path(@book) %></li>
+      <li><%= link_to "See revision history", history_device_path(@book) %></li>
+    </ul>
+  </nav>
+</section>

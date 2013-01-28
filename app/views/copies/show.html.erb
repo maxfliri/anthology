@@ -1,7 +1,7 @@
 <section class="single_book wrap">
   <h1><span class="book_reference">#<%= @copy.book_reference %></span> <%= @book.title %></h1>
 
-  <p style="text-align: center;"><%= book_cover_tag @book, :size => "S" %></p>
+  <p style="text-align: center;"><%= resource_image_tag(@book) %></p>
 
   <% if @copy.available? %>
     <p class="loan_status available">Available to borrow <%= link_to "Borrow", borrow_copy_path(@copy), :class => 'btn', :method => :post %>
@@ -32,8 +32,8 @@
 
   <nav class="actions">
     <ul>
-      <li><%= link_to "See all copies of this book", book_path(@book) %></li>
-      <li><%= link_to "Add another copy", new_book_copy_path(@book) %></li>
+      <li><%= link_to "See all copies of this #{@book.class.name.downcase}", polymorphic_path(@book) %></li>
+      <li><%= link_to "Add another copy", polymorphic_path(@book, :action => :new) %></li>
     </ul>
   </nav>
 </section>

@@ -1,0 +1,7 @@
+<div class="display_selection wrap">
+  view as
+  <ul>
+    <li class="<%= 'selected' unless params[:display] %>"><%= link_to "grid", devices_path %></li>
+    <li class="<%= 'selected' if params[:display] == 'list' %>"><%= link_to "list", list_devices_path %></li>
+  </ul>
+</div>

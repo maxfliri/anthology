@@ -1,6 +1,8 @@
 class Device < ActiveRecord::Base
   attr_accessible :image, :model
 
+  alias_attribute :title, :model
+
   has_paper_trail
 
   validates :model, :presence => true

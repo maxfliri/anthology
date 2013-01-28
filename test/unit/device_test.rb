@@ -22,4 +22,10 @@ class DeviceTest < ActiveSupport::TestCase
 
   end
 
+  should "return the model as title" do
+    device = FactoryGirl.build(:device, :model => "XYZ")
+
+    assert_equal device.title, "XYZ"
+  end
+
 end

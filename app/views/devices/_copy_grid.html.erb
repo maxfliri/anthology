@@ -1,0 +1,3 @@
+<ul class="books books_grid">
+  <% copies.each do |copy| %><li class="<%= copy.available? ? "available" : "unavailable" %>"><%= link_to copy_path(copy) do %><%= device_image_tag(copy.book) %><% end %></li><% end %>
+</ul>

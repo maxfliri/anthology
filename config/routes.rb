@@ -19,9 +19,14 @@ Books::Application.routes.draw do
 
   get '/books/isbn/:isbn' => "books#lookup_isbn", :as => :book_isbn_lookup
   get '/books/list' => "books#index", :as => :book_list, :display => 'list'
-  resources :books do
+
+  resources :devices, :books do
     member do
       get :history
+    end
+
+    collection do
+      get :list, :action => "index", :display => 'list'
     end
 
     resources :copies, :only => [:new, :create]
