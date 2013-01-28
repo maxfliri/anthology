@@ -67,8 +67,4 @@ class Copy < ActiveRecord::Base
   alias_attribute :book, :resource
   alias_attribute :book_reference, :reference
 
-  def self.find_by_book_reference(args)
-    find_by_reference(args)
-  end
-
 end

@@ -11,7 +11,7 @@ class CopiesController < ApplicationController
   end
 
   def lookup
-    @copy = Copy.find_by_book_reference(params[:book_reference])
+    @copy = Copy.find_by_reference(params[:book_reference])
 
     if @copy
       redirect_to copy_path(@copy)
@@ -60,7 +60,7 @@ class CopiesController < ApplicationController
     end
 
     def resource
-      @copy = Copy.find_by_book_reference(params[:id]) || not_found
+      @copy = Copy.find_by_reference(params[:id]) || not_found
     end
 
 end
