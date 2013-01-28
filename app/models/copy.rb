@@ -1,17 +1,17 @@
 class Copy < ActiveRecord::Base
-  attr_accessible :book_id, :book_reference, :on_loan
+  attr_accessible :resource_id, :reference, :on_loan
 
-  belongs_to :book
+  belongs_to :resource, :polymorphic => true
   has_many :loans, :dependent => :destroy
   has_many :users, :through => :loans
 
-  validates :book_reference, :presence => true, :uniqueness => { :case_sensitive => false }
+  validates :reference, :presence => true, :uniqueness => { :case_sensitive => false }
 
-  before_validation :allocate_book_reference, :on => :create, :if => proc {|c| c.book_reference.blank? }
+  before_validation :allocate_reference, :on => :create, :if => proc {|c| c.reference.blank? }
 
   scope :on_loan, where(:on_loan => true)
   scope :available, where(:on_loan => false)
-  scope :ordered_by_availability, order("on_loan ASC, book_reference ASC")
+  scope :ordered_by_availability, order("on_loan ASC, reference ASC")
   scope :recently_added, order("created_at DESC")
 
   class NotAvailable < Exception; end
@@ -56,11 +56,19 @@ class Copy < ActiveRecord::Base
     loans.where(:user_id => user.id, :state => 'on_loan').each(&:return)
   end
 
-  def allocate_book_reference
-    self.book_reference = (Copy.order("book_reference desc nulls last").first || Copy.new).book_reference.to_i + 1
+  def allocate_reference
+    self.reference = (Copy.order("reference desc nulls last").first || Copy.new).reference.to_i + 1
   end
 
   def to_param
-    book_reference
+    reference
   end
+
+  alias_attribute :book, :resource
+  alias_attribute :book_reference, :reference
+
+  def self.find_by_book_reference(args)
+    find_by_reference(args)
+  end
+
 end

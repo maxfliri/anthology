@@ -13,7 +13,7 @@ class Book < ActiveRecord::Base
 
   after_create :setup_first_copy
 
-  has_many :copies, :dependent => :destroy
+  has_many :copies, :as => :resource, :dependent => :destroy
   has_many :loans, :through => :copies
 
   belongs_to :created_by, :class_name => "User"

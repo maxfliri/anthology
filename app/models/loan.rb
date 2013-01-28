@@ -4,8 +4,6 @@ class Loan < ActiveRecord::Base
   belongs_to :copy
   belongs_to :user
 
-  has_one :book, :through => :copy
-
   scope :on_loan, where(:state => 'on_loan')
   scope :returned, where(:state => 'returned')
   scope :history, where(:state => 'returned').order("loan_date DESC")
@@ -24,6 +22,10 @@ class Loan < ActiveRecord::Base
     self.state = 'returned'
     self.return_date = Time.now
     self.save
+  end
+
+  def book
+    copy.resource
   end
 
   def set_loan_date

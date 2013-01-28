@@ -8,11 +8,11 @@ class User < ActiveRecord::Base
   validates :uid, :presence => true, :uniqueness => {:scope => :provider}
 
   def current_copies
-    copies.includes(:book)
+    copies.includes(:resource)
   end
 
   def previous_loans
-    loans.returned.includes(:copy).includes(:book)
+    loans.returned.includes(:copy)
   end
 
   def self.find_or_create_from_auth_hash(auth_hash)

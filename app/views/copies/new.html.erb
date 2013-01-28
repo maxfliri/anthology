@@ -4,7 +4,7 @@
   <p>Leave blank to generate a Copy ID automatically.</p>
 
   <%= semantic_form_for [@book, @copy] do |f| %>
-    <%= f.input :book_reference, :label => "Copy ID" %>
+    <%= f.input :reference, :label => "Copy ID" %>
 
     <%= f.actions %>
   <% end %>

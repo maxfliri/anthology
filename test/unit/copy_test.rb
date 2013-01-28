@@ -7,14 +7,14 @@ class CopyTest < ActiveSupport::TestCase
   end
 
   should "return the book reference as the url parameter" do
-    copy = FactoryGirl.create(:copy, :book_reference => "123")
+    copy = FactoryGirl.create(:copy, :reference => "123")
     assert_equal 123, copy.to_param
   end
 
   context "creating a new copy" do
     should "increment the book reference" do
       first_copy = @book.copies.first # already created on book creation
-      second_copy = @book.copies.create!(:book_reference => 2)
+      second_copy = @book.copies.create!(:reference => 2)
       third_copy = @book.copies.create!
 
       assert_equal 1, first_copy.book_reference.to_i
@@ -23,8 +23,8 @@ class CopyTest < ActiveSupport::TestCase
     end
 
     should "not allow duplicate book references" do
-      first_copy = @book.copies.create!(:book_reference => 30)
-      second_copy = @book.copies.build(:book_reference => 30)
+      first_copy = @book.copies.create!(:reference => 30)
+      second_copy = @book.copies.build(:reference => 30)
 
       assert_equal 30, first_copy.book_reference.to_i
       assert ! second_copy.valid?
@@ -116,9 +116,9 @@ class CopyTest < ActiveSupport::TestCase
       @book.copies.delete_all
 
       copies = [
-        FactoryGirl.create(:copy, :book_reference => 101, :book => @book),
-        FactoryGirl.create(:copy, :book_reference => 201, :book => @book),
-        FactoryGirl.create(:copy, :book_reference => 301, :book => @book)
+        FactoryGirl.create(:copy, :reference => 101, :book => @book),
+        FactoryGirl.create(:copy, :reference => 201, :book => @book),
+        FactoryGirl.create(:copy, :reference => 301, :book => @book)
       ]
       assert_equal 301, Copy.recently_added.first.book_reference
       assert_equal 101, Copy.recently_added.last.book_reference
