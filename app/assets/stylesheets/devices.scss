@@ -1,0 +1,32 @@
+ul.books {
+  &.devices_grid {
+    h3 {
+      width: 128px;
+    }
+
+    .photo {
+      overflow: hidden;
+      text-align: center;
+      width: 128px;
+      height: 128px;
+      @media (max-width: 640px){
+        width: 64px;
+        height: 64px;
+      }
+    }
+
+    img {
+      display: inline-block;
+      max-width: none;
+      max-height: none;
+
+      background: #fff;
+      height: 128px;
+      margin: auto -64px;
+      @media (max-width: 640px){
+        max-height: 64px;
+        max-width: 64px;
+      }
+    }
+  }
+}
