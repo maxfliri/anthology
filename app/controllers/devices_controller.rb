@@ -1,6 +1,6 @@
 class DevicesController < ApplicationController
 
-  before_filter :lookup_device, :only => [:show, :edit, :history, :update]
+  before_filter :lookup_device, :only => [:show, :edit, :history, :update, :destroy, :restore]
   has_scope :model_search, :as => :q
 
   def index
@@ -50,8 +50,20 @@ class DevicesController < ApplicationController
     end
   end
 
+  def destroy
+    @book.trash!
+    flash[:notice] = "Device deleted."
+    redirect_to devices_path
+  end
+
+  def restore
+    @book.untrash!
+    flash[:notice] = 'Device restored.'
+    redirect_to device_path(@book)
+  end
+
   private
     def lookup_device
-      @book = Device.includes(:copies).find(params[:id]) || not_found
+      @book = Device.includes(:copies).unscoped.find(params[:id]) || not_found
     end
 end

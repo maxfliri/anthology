@@ -22,6 +22,24 @@ class DeviceTest < ActiveSupport::TestCase
 
   end
 
+  context "trashing a device" do
+    should "set the device as trashed" do
+      device = FactoryGirl.create(:device, trashed: false)
+
+      device.trash!
+
+      assert_equal true, device.trashed
+    end
+
+    should "set the device as untrashed" do
+      device = FactoryGirl.create(:device, trashed: true)
+
+      device.untrash!
+
+      assert_equal false, device.trashed
+    end
+  end
+
   should "return the model as title" do
     device = FactoryGirl.build(:device, :model => "XYZ")
 

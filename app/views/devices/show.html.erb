@@ -13,8 +13,13 @@
 
   <nav class="actions">
     <ul>
-      <li><%= link_to "Edit details", edit_device_path(@book) %></li>
-      <li><%= link_to "Add another copy", new_device_copy_path(@book) %></li>
+      <%if @book.trashed? %>
+        <li><%= link_to "Restore", restore_device_path(@book), method: :post %></li>
+      <% else %>
+        <li><%= link_to "Edit details", edit_device_path(@book) %></li>
+        <li><%= link_to "Add another copy", new_device_copy_path(@book) %></li>
+        <li><%= link_to "Delete", device_path(@book), method: :delete %></li>
+      <% end %>
       <li><%= link_to "See revision history", history_device_path(@book) %></li>
     </ul>
   </nav>

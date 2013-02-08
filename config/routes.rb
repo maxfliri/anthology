@@ -23,6 +23,7 @@ Books::Application.routes.draw do
   resources :devices, :books do
     member do
       get :history
+      post :restore
     end
 
     collection do

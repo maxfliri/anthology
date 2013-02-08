@@ -1,5 +1,5 @@
 class Device < ActiveRecord::Base
-  attr_accessible :image, :model
+  attr_accessible :image, :model, :trashed
 
   alias_attribute :title, :model
 
@@ -16,10 +16,19 @@ class Device < ActiveRecord::Base
 
   scope :model_search, proc {|q| where("model ILIKE ?", "%#{q}%") }
 
+  default_scope where(trashed: false)
   default_scope order("model ASC")
 
   def available?
     self.copies.available.any?
+  end
+
+  def trash!
+    self.update_attributes(trashed: true)
+  end
+
+  def untrash!
+    self.update_attributes(trashed: false)
   end
 
   private
