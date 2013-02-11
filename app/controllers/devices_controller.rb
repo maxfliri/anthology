@@ -22,7 +22,7 @@ class DevicesController < ApplicationController
     @book.created_by = current_user
 
     if @book.save
-      flash[:notice] = 'Book created'
+      flash[:notice] = 'Device created'
       redirect_to device_path(@book)
     else
       render :action => :new
@@ -43,7 +43,7 @@ class DevicesController < ApplicationController
 
   def update
     if @book.update_attributes(params[:device])
-      flash[:notice] = 'Book updated'
+      flash[:notice] = 'Device updated'
       redirect_to device_path(@book)
     else
       render :action => :edit
