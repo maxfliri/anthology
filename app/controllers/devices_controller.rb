@@ -52,7 +52,7 @@ class DevicesController < ApplicationController
 
   def destroy
     @book.trash!
-    flash[:notice] = "Device deleted."
+    flash[:notice] = "Device deleted. #{view_context.link_to('Undo', restore_device_path(@book), method: :post)}".html_safe
     redirect_to devices_path
   end
 
