@@ -54,6 +54,18 @@ class CopiesController < ApplicationController
     redirect_to copy_path(resource)
   end
 
+  def nudge
+    mail = LibraryMailer.nudge_email(resource.current_loan)
+    mail.deliver
+    flash[:notice] = "A nudge email has been sent to #{resource.current_user.name}."
+  rescue Exception => e
+    logger.error e.message
+    logger.error e.backtrace.join("\n")
+    flash[:alert] = "Nudge email could not be sent!"
+  ensure
+    redirect_to copy_path(resource)
+  end
+
   private
     def parent
       @book = Book.find(params[:book_id])

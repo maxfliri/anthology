@@ -4,7 +4,11 @@
     <p>Available to borrow <%= link_to "Borrow", borrow_copy_path(copy), :class => 'btn', :method => :post %></p>
   <% else %>
     <p>On loan to <%= copy.current_user == current_user ? "you" : copy.current_user.name %>
-      <%= link_to "Return", return_copy_path(copy), :class => 'btn', :method => :post if copy.current_user == current_user %>
+      <% if copy.current_user == current_user %>
+        <%= link_to "Return", return_copy_path(copy), :class => 'btn', :method => :post %>
+      <% else %>
+        <%= link_to "Nudge", nudge_copy_path(copy), :class => 'btn', :method => :post %>
+      <% end %>
       <span class="since">since <%= copy.current_loan.loan_date.strftime("%b %d, %Y") %></span>
     </p>
   <% end %>

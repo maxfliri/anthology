@@ -14,6 +14,7 @@ Books::Application.routes.draw do
     member do
       post :borrow
       post :return
+      post :nudge
     end
   end
 
