@@ -1,0 +1,10 @@
+Hello <%= @loan.user.name %>,
+
+You have received this email because you have on loan
+the <%= @loan.copy.resource_type %> "<%= @loan.copy.resource.title %>".
+Another user is waiting to borrow it and is asking you
+to return it as soon as possible.
+
+Thanks for your collaboration,
+
+<%= library_title %>
