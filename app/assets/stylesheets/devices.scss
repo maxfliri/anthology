@@ -24,9 +24,31 @@ ul.books {
       height: 128px;
       margin: auto -64px;
       @media (max-width: 640px){
-        max-height: 64px;
-        max-width: 64px;
+        height: 64px;
       }
+    }
+  }
+}
+
+#new_device {
+  figure {
+    width: 72%;
+    padding: 0 2px;
+    margin: -23px 0px 16px 25%;
+    text-align: center;
+    color: #fff;
+    background: #444;
+    background: -webkit-linear-gradient(#555, #333);
+  }
+
+  figcaption {
+    padding: 8px;
+  }
+
+  img {
+    height: 128px;
+    @media (max-width: 640px){
+      height: 64px;
     }
   }
 }

@@ -3,7 +3,12 @@
 
   <%= semantic_form_for @book do |f| %>
     <%= f.input :model %>
-    <%= f.input :image %>
+    <%= f.input :image, as: :url %>
+
+    <figure id="device_image_preview" style="display: none;">
+        <figcaption>Preview</figcaption>
+        <%= image_tag "mobile.png", :alt => "Preview" %>
+    </figure>
 
     <%= f.actions %>
   <% end %>
