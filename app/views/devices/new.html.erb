@@ -3,7 +3,7 @@
 
   <%= semantic_form_for @book do |f| %>
     <%= f.input :model %>
-    <%= f.input :image, as: :url %>
+    <%= f.input :image, as: :url, label: "Image URL" %>
 
     <figure id="device_image_preview" style="display: none;">
         <figcaption>Preview</figcaption>
